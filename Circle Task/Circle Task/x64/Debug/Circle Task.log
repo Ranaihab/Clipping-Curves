@@ -1,0 +1,7 @@
+﻿  20190207_20190663_CS1-2.cpp
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\20190207_20190663_CS1-2.cpp(81,17): warning C4244: 'return': conversion from 'WPARAM' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\20190207_20190663_CS1-2.cpp(111,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\20190207_20190663_CS1-2.cpp(112,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\20190207_20190663_CS1-2.cpp(128,23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\20190207_20190663_CS1-2.cpp(129,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Circle Task.vcxproj -> E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\x64\Debug\Circle Task.exe

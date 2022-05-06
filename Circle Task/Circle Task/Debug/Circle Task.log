@@ -1,0 +1,11 @@
+﻿  Circle Task.cpp
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(110,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(126,23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(127,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(153,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(167,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(178,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(193,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(216,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Circle Task\Circle Task.cpp(217,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Circle Task.vcxproj -> E:\University\College\Grade 3\Spring 2022\Computer Graphics\Assignmnets\Circle Task\Debug\Circle Task.exe
