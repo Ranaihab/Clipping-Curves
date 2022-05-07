@@ -50,8 +50,8 @@ int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszA
 		WS_OVERLAPPEDWINDOW, /* default window */
 		CW_USEDEFAULT,       /* Windows decides the position */
 		CW_USEDEFAULT,       /* where the window ends up on the screen */
-		544,                 /* The programs width */
-		375,                 /* and height in pixels */
+		1544,                 /* The programs width */
+		1375,                 /* and height in pixels */
 		HWND_DESKTOP,        /* The window is a child-window to desktop */
 		NULL,                /* No menu */
 		hThisInstance,       /* Program Instance handler */
@@ -72,15 +72,6 @@ int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszA
 
 	/* The program return-value is 0 - The value that PostQuitMessage() gave */
 	return messages.wParam;
-}
-void swap(int& x1, int& y1, int& x2, int& y2)
-{
-	int tmp = x1;
-	x1 = x2;
-	x2 = tmp;
-	tmp = y1;
-	y1 = y2;
-	y2 = tmp;
 }
 int Round(double x)
 {
@@ -114,32 +105,69 @@ void DrawCircle(HDC hdc, int xc, int yc, int r)
 	}
 }
 
+
+COLORREF clip(int x, int y, int xc, int yc, double r) {
+	double dist = sqrt(1.0 * (xc - x) * (xc - x) + 1.0 * (yc - y) * (yc - y));
+	if (dist <= r)
+		return RGB(255, 0, 0);
+	return RGB(0, 0, 255);
+}
+
+void Bezier(HDC hdc, int x[], int y[], double r, int xc, int yc) {
+	int a1 = x[0];
+	int a2 = 3*(x[1] - x[0]);
+	int a3 = 3 * x[0] - 6 * x[1] + 3 * x[2];
+	int a4 = -1 * x[0] + 3 * x[1] - 3 * x[2] + x[3];
+	int b1 = y[0];
+	int b2 = 3 * (y[1] - y[0]);
+	int b3 = 3 * y[0] - 6 * y[1] + 3 * y[2];
+	int b4 = -1 * y[0] + 3 * y[1] - 3 * y[2] + y[3];
+
+	for (double t = 0; t <= 1; t += 0.0001) {
+		double t2 = t * t, t3 = t2 * t;
+		double x1 = a1 + a2 * t + a3 * t2 + a4 * t3;
+		double y1 = b1 + b2 * t + b3 * t2 + b4 * t3;
+		SetPixel(hdc, Round(x1), Round(y1), clip(Round(x1), Round(y1), xc, yc, r));
+	}
+}
+
 LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
-	static int x[3], y[3];
-	static int cnt = 0;
-	int R0, R1;
+	static int x[4], y[4];
+	static bool isWindow = true;
+	static int xc[2], yc[2];
+	static double r;
+	static int cnt = 0, cnt2 = 0;
 	switch (message)
 	{
 	case WM_LBUTTONDOWN:
-
-		x[cnt] = LOWORD(lParam);
-		y[cnt++] = HIWORD(lParam);
-		break;
-	case WM_RBUTTONDOWN:
-		x[cnt] = LOWORD(lParam);
-		y[cnt++] = HIWORD(lParam);
-		if (cnt == 3) {
-			R0 = Round(sqrt(1.0 * (x[0] - x[2]) * (x[0] - x[2]) + 1.0 * (y[0] - y[2]) * (y[0] - y[2])));//radius of the first circle using law distance of 2 points
-			R1 = Round(sqrt(1.0 * (x[1] - x[2]) * (x[1] - x[2]) + 1.0 * (y[1] - y[2]) * (y[1] - y[2])));//radius of the second circle using law distance of 2 points
-			hdc = GetDC(hwnd);
-			DrawCircle(hdc, x[0], y[0], R0);
-			DrawCircle(hdc, x[1], y[1], R1);
-			ReleaseDC(hwnd, hdc);
-			cnt = 0;
+		if (isWindow) {
+			xc[cnt] = LOWORD(lParam);
+			yc[cnt++] = HIWORD(lParam);
+			if (cnt == 2) {
+				hdc = GetDC(hwnd);
+				r = sqrt(1.0 * (xc[0] - xc[1]) * (xc[0] - xc[1]) + 1.0 * (yc[0] - yc[1]) * (yc[0] - yc[1]));
+				isWindow = false;
+				cnt = 0;
+				DrawCircle(hdc, xc[0], yc[0], r);
+				ReleaseDC(hwnd, hdc);
+			}
 		}
+		else {
+			x[cnt] = LOWORD(lParam);
+			y[cnt++] = HIWORD(lParam);
+			if (cnt == 4 && cnt2 < 2) {
+				cnt2++;
+				cnt = 0;
+				hdc = GetDC(hwnd);
+				Bezier(hdc, x, y, r, xc[0], yc[0]);
+				ReleaseDC(hwnd, hdc);
+			}
+		}
+		
 		break;
+
 	case WM_DESTROY:
 		PostQuitMessage(0);       /* send a WM_QUIT to the message queue */
 		break;
